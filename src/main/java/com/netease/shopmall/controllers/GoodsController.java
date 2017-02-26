@@ -1,7 +1,5 @@
 package com.netease.shopmall.controllers;
 
-import java.io.File;
-import java.util.UUID;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -16,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.netease.shopmall.entities.Goods;
 import com.netease.shopmall.services.GoodsService;
-
+import com.netease.shopmall.utils.CommonUtil;
 
 @Controller
 @RequestMapping("/goods")
@@ -26,11 +24,24 @@ public class GoodsController {
 	GoodsService goodsService;
 	
 	/*
+	 * 首页展示
+	 */
+	@RequestMapping("/index")
+	public String index(Model model,@RequestParam(required=false,defaultValue="1") int pageNO){
+		int size=10;
+		model.addAttribute("size",size);
+		model.addAttribute("pageNO",pageNO);
+		model.addAttribute("count",goodsService.getGoodsCount());
+		model.addAttribute("goods", goodsService.getGoodsPager(pageNO, size));
+		return "goods/index";
+	}
+	
+	/*
 	 * 产品列表与分页Action
 	 */
 	@RequestMapping("/list")
 	public String list(Model model,@RequestParam(required=false,defaultValue="1") int pageNO){
-		int size=12;
+		int size=10;
 		model.addAttribute("size",size);
 		model.addAttribute("pageNO",pageNO);
 		model.addAttribute("count",goodsService.getGoodsCount());
@@ -57,14 +68,16 @@ public class GoodsController {
 	 * 删除多个产品对象Action
 	 */
 	@RequestMapping("/deletes")
-	public String deletes(Model model,@RequestParam int[] id,@RequestParam(required=false,defaultValue="1") int pageNO,RedirectAttributes redirectAttributes){
-		//执行删除
-		int rows=goodsService.deletes(id);
-		if(rows>0)
-		{
-			redirectAttributes.addFlashAttribute("message", "删除"+rows+"行记录成功！");
-		}else{
-			redirectAttributes.addFlashAttribute("message", "删除失败！");
+	public String deletes(Model model,@RequestParam(required=false) int[] id,@RequestParam(required=false,defaultValue="1") int pageNO,RedirectAttributes redirectAttributes){
+		if(id!=null) {
+			//执行删除
+			int rows=goodsService.deletes(id);
+			if(rows>0)
+			{
+				redirectAttributes.addFlashAttribute("message", "删除"+rows+"行记录成功！");
+			}else{
+				redirectAttributes.addFlashAttribute("message", "删除失败！");
+			}
 		}
 		return "redirect:/goods/list?pageNO="+pageNO;
 	}
@@ -83,11 +96,14 @@ public class GoodsController {
 	 */
 	@RequestMapping("/addSave")
 	public String addSave(Model model,@ModelAttribute("entity") @Valid Goods entity,BindingResult bindingResult,MultipartFile picFile,HttpServletRequest request){
-		if(picFile!=null){ 
-			System.out.println("ok************");
+		String path=request.getServletContext().getRealPath("/images");
+		String filename = CommonUtil.savePic(picFile, path);
+		if(filename!=null) {
+			entity.setPicture(filename);
 		}
 		//如果模型中存在错误
-		if(!bindingResult.hasErrors()){
+		if(!bindingResult.hasErrors()||filename!=null){
+			entity.setPicture(filename);
 			if(goodsService.insert(entity)>0)
 			{
 				return "redirect:/goods/list";	
@@ -115,7 +131,7 @@ public class GoodsController {
 		if(!bindingResult.hasErrors()){
 			if(goodsService.update(entity)>0)
 			{
-				return "redirect:list";	
+				return "redirect:/goods/list";	
 			}
 		}
 		model.addAttribute("entity", entity);
@@ -128,7 +144,7 @@ public class GoodsController {
 	@RequestMapping("/upPicture/{id}")
 	public String upPicture(Model model,@PathVariable int id){
 		model.addAttribute("entity", goodsService.getGoodsById(id));
-		return "goods/upfile";
+		return "/goods/upfile";
 	}
 	
 	/*
@@ -137,29 +153,15 @@ public class GoodsController {
 	@RequestMapping("/upPictureSave/{id}")
 	public String upPictureSave(Model model,@PathVariable int id,MultipartFile picFile,HttpServletRequest request){
 		Goods entity=goodsService.getGoodsById(id);
-		//如果选择了文件
-		if(picFile!=null){ 
-			//如果文件大小不为0
-			if(picFile.getSize()>0){
-				//获得上传位置
-				String path=request.getServletContext().getRealPath("/images");
-				//生成文件名
-				String filename=UUID.randomUUID().toString()+picFile.getOriginalFilename().substring(picFile.getOriginalFilename().lastIndexOf("."));
-				File tempFile=new File(path, filename);
-				try {
-					//保存文件
-					picFile.transferTo(tempFile);
-					//更新数据
-					entity.setPicture(filename);
-					goodsService.update(entity);
-					//转向列表页
-					return "redirect:/goods/list";	
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
+		String path=request.getServletContext().getRealPath("/images");
+		String filename = CommonUtil.savePic(picFile, path);
+		if(filename!=null) {
+			entity.setPicture(filename);
+			goodsService.update(entity);
+			//转向列表页
+			return "redirect:/goods/list";	
 		}
 		model.addAttribute("entity", entity);
-		return "goods/upfile";
+		return "/goods/upfile";
 	}
 }
