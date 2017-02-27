@@ -16,9 +16,9 @@
 		<h2 class="title">
 			<span>商品管理</span>
 		</h2>
-		<c:set var="userName" scope="session" value="${userName}" />
-		<c:if test="${not empty userName}">
-			<span>欢迎您！${userName}</span>
+		<c:set var="sellerName" scope="session" value="${sellerName}" />
+		<c:if test="${not empty sellerName}">
+			<span>欢迎您！${sellerName}</span>
 		</c:if>
 		<form action="<c:url value="/goods/deletes?pageNO=${pageNO}"/>"
 			method="post">
@@ -61,18 +61,9 @@
 				src="<c:url value="/scripts/pagination22/jquery.pagination2.2.js"/>"></script>
 			<script type="text/javascript">
 				//初始化分页组件
-				var count = $
-				{
-					count
-				};
-				var size = $
-				{
-					size
-				};
-				var pageNO = $
-				{
-					pageNO
-				};
+				var count = ${count};
+				var size = ${size};
+				var pageNO = ${pageNO};
 				$("#pager").pagination(count, {
 					items_per_page : size,
 					current_page : pageNO - 1,
