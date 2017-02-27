@@ -41,11 +41,11 @@
 
 				<div class="col-sm-4 header-left">
 					<p class="log">
-					<c:set var="userName" scope="session" value="${userName}"/>
-					<c:if test="${not empty userName}">
-						<span>欢迎您！${userName}</span>
+					<c:set var="buyerName" scope="session" value="${buyerName}"/>
+					<c:if test="${not empty buyerName}">
+						<span>欢迎您！${buyerName}</span> <a href="<c:url value="/user/loginout"/>">退出</a>
 					</c:if>
-					<c:if test="${empty userName}">
+					<c:if test="${empty buyerName}">
 						<a href="<c:url value="/user/login"/>"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户登录</a>
 					</c:if>
 					</p>

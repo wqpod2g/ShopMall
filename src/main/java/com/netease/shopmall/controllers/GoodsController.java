@@ -33,16 +33,19 @@ public class GoodsController {
 	@RequestMapping("/index")
 	public String index(Model model,@RequestParam(required=false,defaultValue="1") int pageNO,HttpServletRequest request){
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute("buyerUser");
 		if(user!=null) {
-			model.addAttribute("userName",user.getName());
+			model.addAttribute("buyerName",user.getName());
+		}
+		else {
+			model.addAttribute("buyerName","");
 		}
 		int size=10;
 		model.addAttribute("size",size);
 		model.addAttribute("pageNO",pageNO);
 		model.addAttribute("count",goodsService.getGoodsCount());
 		model.addAttribute("goods", goodsService.getGoodsPager(pageNO, size));
-		return "goods/index";
+		return "/goods/index";
 	}
 	
 	/*
@@ -51,16 +54,19 @@ public class GoodsController {
 	@RequestMapping("/list")
 	public String list(Model model,@RequestParam(required=false,defaultValue="1") int pageNO,HttpServletRequest request){
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute("sellerUser");
 		if(user!=null) {
-			model.addAttribute("userName",user.getName());
+			model.addAttribute("sellerName",user.getName());
+			int size=10;
+			model.addAttribute("size",size);
+			model.addAttribute("pageNO",pageNO);
+			model.addAttribute("count",goodsService.getGoodsCount());
+			model.addAttribute("goods", goodsService.getGoodsPager(pageNO, size));
+			return "goods/list";
 		}
-		int size=10;
-		model.addAttribute("size",size);
-		model.addAttribute("pageNO",pageNO);
-		model.addAttribute("count",goodsService.getGoodsCount());
-		model.addAttribute("goods", goodsService.getGoodsPager(pageNO, size));
-		return "goods/list";
+		else {
+			return "/account/login";
+		}
 	}
 	
 	
@@ -102,7 +108,7 @@ public class GoodsController {
 	@RequestMapping("/add")
 	public String add(Model model){
 		model.addAttribute("entity", new Goods());
-		return "goods/add";
+		return "/goods/add";
 	}
 	
 	/*
@@ -124,7 +130,7 @@ public class GoodsController {
 			}
 		}
 		model.addAttribute("entity", entity);
-		return "goods/add";
+		return "/goods/add";
 	}
 	
 	/*
@@ -133,7 +139,7 @@ public class GoodsController {
 	@RequestMapping("/edit/{id}")
 	public String edit(Model model,@PathVariable int id){
 		model.addAttribute("entity", goodsService.getGoodsById(id));
-		return "goods/edit";
+		return "/goods/edit";
 	}
 	
 	/*

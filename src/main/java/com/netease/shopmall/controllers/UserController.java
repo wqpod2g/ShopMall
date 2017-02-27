@@ -29,18 +29,27 @@ public class UserController {
 	public String checkLogin(Model model,User user,RedirectAttributes redirectAttributes,HttpServletRequest request) {
 		if(userService.checkLogin(user)) {
 			HttpSession session = request.getSession();
-			session.setAttribute("user",user);
 			//卖家登录
 			if(user.getFlag()==1) {
+				session.setAttribute("sellerUser",user);
 				return "redirect:/goods/list";
 			}
-			else return "redirect:/goods/index";
+			else {
+				session.setAttribute("buyerUser",user);
+				return "redirect:/goods/index";
+			}
 		}
 		else {
 			redirectAttributes.addFlashAttribute("message", "用户名密码错误!");
 			return "redirect:/user/login";
 		}
-		
+	}
+	
+	@RequestMapping("/loginout")
+	public String loginOut(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.setAttribute("buyerUser", null);
+		return "redirect:/goods/index";
 	}
 
 }
