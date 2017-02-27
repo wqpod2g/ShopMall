@@ -184,4 +184,12 @@ public class GoodsController {
 		model.addAttribute("entity", entity);
 		return "/goods/upfile";
 	}
+	
+	@RequestMapping("/single/{id}")
+	public String goodsDetail(Model model,@PathVariable int id) {
+		Goods entity = goodsService.getGoodsById(id);
+		model.addAttribute("entity", entity);
+		return "/goods/single";
+	}
+	
 }
