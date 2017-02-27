@@ -2,7 +2,9 @@ package com.netease.shopmall.controllers;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.netease.shopmall.entities.Goods;
+import com.netease.shopmall.entities.User;
 import com.netease.shopmall.services.GoodsService;
 import com.netease.shopmall.utils.CommonUtil;
 
@@ -27,7 +31,12 @@ public class GoodsController {
 	 * 首页展示
 	 */
 	@RequestMapping("/index")
-	public String index(Model model,@RequestParam(required=false,defaultValue="1") int pageNO){
+	public String index(Model model,@RequestParam(required=false,defaultValue="1") int pageNO,HttpServletRequest request){
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		if(user!=null) {
+			model.addAttribute("userName",user.getName());
+		}
 		int size=10;
 		model.addAttribute("size",size);
 		model.addAttribute("pageNO",pageNO);
@@ -40,7 +49,12 @@ public class GoodsController {
 	 * 产品列表与分页Action
 	 */
 	@RequestMapping("/list")
-	public String list(Model model,@RequestParam(required=false,defaultValue="1") int pageNO){
+	public String list(Model model,@RequestParam(required=false,defaultValue="1") int pageNO,HttpServletRequest request){
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		if(user!=null) {
+			model.addAttribute("userName",user.getName());
+		}
 		int size=10;
 		model.addAttribute("size",size);
 		model.addAttribute("pageNO",pageNO);

@@ -1,10 +1,10 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Home</title>
+<title>登录</title>
 <link href="<c:url value="/styles/bootstrap.css"/>" rel="stylesheet"
 	type="text/css" media="all" />
 <link href="<c:url value="/styles/memenu.css"/>" rel="stylesheet"
@@ -15,13 +15,15 @@
 	type="text/css" media="all" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-</head>
+<meta name="keywords"
+	content="Fashion Mania Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <body>
 	<!--header-->
 	<div class="header">
 		<div class="header-top">
 			<div class="container">
-				<div class="col-sm-4 world">
+				<div class="col-md-4 world">
 					<ul>
 						<li><select class="in-drop">
 								<option>English</option>
@@ -35,20 +37,16 @@
 						</select></li>
 					</ul>
 				</div>
-				<div class="col-sm-4 logo">
-					<a href="index.html"><img src="<c:url value="/images/logo.png"/>" alt=""></a>
+				<div class="col-md-4 logo">
+					<a href="index.html"><img
+						src="<c:url value="/images/logo.png"/>" alt=""></a>
 				</div>
 
-				<div class="col-sm-4 header-left">
+				<div class="col-md-4 header-left">
 					<p class="log">
-					<c:set var="userName" scope="session" value="${userName}"/>
-					<c:if test="${not empty userName}">
-						<span>欢迎您！${userName}</span>
-					</c:if>
-					<c:if test="${empty userName}">
-						<a href="<c:url value="/user/login"/>"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户登录</a>
-					</c:if>
-					</p>
+						<a href="<c:url value="/user/login"/>"> <span
+							class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户登录
+						</a>
 					<div class="cart box_1">
 						<a href="checkout.html">
 							<h3>
@@ -70,10 +68,10 @@
 		</div>
 		<div class="container">
 			<div class="head-top">
-				<div class="col-sm-2 number">
+				<div class="col-md-2 number">
 					<span><i class="glyphicon glyphicon-phone"></i>123 456 789</span>
 				</div>
-				<div class="col-sm-8 h_menu4">
+				<div class="col-md-8 h_menu4">
 					<ul class="memenu skyblue">
 						<li class=" grid"><a href="<c:url value="/goods/index"/>">首页</a></li>
 						<li><a href="#">Men</a>
@@ -194,7 +192,7 @@
 						<li><a class="color6" href="contact.html">Conact</a></li>
 					</ul>
 				</div>
-				<div class="col-sm-2 search">
+				<div class="col-md-2 search">
 					<a class="play-icon popup-with-zoom-anim" href="#small-dialog"><i
 						class="glyphicon glyphicon-search"> </i> </a>
 				</div>
@@ -203,8 +201,8 @@
 					<div class="search-top">
 						<div class="login">
 							<input type="submit" value=""> <input type="text"
-								value="Type something..." onFocus="this.value = '';"
-								onBlur="if (this.value == '') {this.value = '';}">
+								value="Type something..." onfocus="this.value = '';"
+								onblur="if (this.value == '') {this.value = '';}">
 						</div>
 						<p>Shopping</p>
 					</div>
@@ -212,43 +210,48 @@
 			</div>
 		</div>
 	</div>
-	<!--content-->
-	<div class="content">
+	<!--//header-->
+	<div class="account">
 		<div class="container">
-			<div class="content-top">
-				<h1>Recent Products</h1>
-				<div class="content-top1">
+			<h1>Account</h1>
+			<div class="account_grid">
+				<div class="col-md-6 login-right">
+					<form action="<c:url value="/user/checkLogin"/>">
 
-					<c:forEach var="entity" items="${goods}">
-						<div class="col-md-3 col-md2">
-							<div class="col-md1 simpleCart_shelfItem">
-								<a href="single.html"> <img class="img-responsive"
-									src="<c:url value="/images/${entity.picture}"/>" alt="" />
-								</a>
-								<h3>
-									<a href="single.html">${entity.name}</a>
-								</h3>
-								<div class="price">
-									<h5 class="item_price">${entity.price}</h5>
-									<a href="#" class="item_add">Add To Cart</a>
-									<div class="clearfix"></div>
-								</div>
-							</div>
+						<span>用户名</span> <input type="text" name="name">
+						<span>密码</span> <input type="text" name="pass">
+
+						<div class="word-in">
+							我是买家&nbsp; <input type="radio" checked="checked" name="flag"
+								value="0" /><br>
+							<hr>
+							我是卖家&nbsp; <input type="radio" name="flag" value="1" /><br>
+							<hr>
+							<input type="submit" value="  登录  ">
+							<p style="color: red">${message}</p>
 						</div>
-					</c:forEach>
-					<div class="clearfix"></div>
+					</form>
 				</div>
+				<div class="col-md-6 login-left">
+					<h4>NEW CUSTOMERS</h4>
+					<p>By creating an account with our store, you will be able to
+						move through the checkout process faster, store multiple shipping
+						addresses, view and track your orders in your account and more.</p>
+					<a class="acount-btn" href="register.html">Create an Account</a>
+				</div>
+				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
-	<!--//content-->
+
 	<!--footer-->
 	<div class="footer">
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="clearfix"></div>
 				<p class="footer-class">
-					Copyright &copy; 2015.Company name All rights reserved.</a>
+					Copyright &copy; 2015.Company name All rights reserved.<a
+						target="_blank" href="http://www.cssmoban.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
 				</p>
 			</div>
 		</div>
@@ -257,10 +260,15 @@
 	<!--//footer-->
 </body>
 <script src="<c:url value="/scripts/jquery.min.js"/>"></script>
-<script src="<c:url value="/scripts/jquery.magnific-popup.js"/>" type="text/javascript"></script>
+<script src="<c:url value="/scripts/jquery.magnific-popup.js"/>"
+	type="text/javascript"></script>
 <script type="application/x-javascript">
 	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
 
 </script>
 <script type="text/javascript" src="<c:url value="/scripts/memenu.js"/>"></script>
