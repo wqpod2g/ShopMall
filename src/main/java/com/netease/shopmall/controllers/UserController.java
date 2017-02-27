@@ -49,6 +49,7 @@ public class UserController {
 	public String loginOut(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.setAttribute("buyerUser", null);
+		session.setAttribute("sellerUser", null);
 		return "redirect:/goods/index";
 	}
 

@@ -18,7 +18,7 @@
 		</h2>
 		<c:set var="sellerName" scope="session" value="${sellerName}" />
 		<c:if test="${not empty sellerName}">
-			<span>欢迎您！${sellerName}</span>
+			<span>欢迎您！${sellerName}</span> <a href="<c:url value="/user/loginout"/>">退出</a>
 		</c:if>
 		<form action="<c:url value="/goods/deletes?pageNO=${pageNO}"/>"
 			method="post">

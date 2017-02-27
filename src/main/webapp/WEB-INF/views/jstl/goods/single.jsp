@@ -1,10 +1,10 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Home</title>
+<title>商品详情</title>
 <link href="<c:url value="/styles/bootstrap.css"/>" rel="stylesheet"
 	type="text/css" media="all" />
 <link href="<c:url value="/styles/memenu.css"/>" rel="stylesheet"
@@ -15,13 +15,24 @@
 	type="text/css" media="all" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+	content="Fashion Mania Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript">
+	
+	
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+</script>
+<!---->
 </head>
 <body>
 	<!--header-->
 	<div class="header">
 		<div class="header-top">
 			<div class="container">
-				<div class="col-sm-4 world">
+				<div class="col-md-4 world">
 					<ul>
 						<li><select class="in-drop">
 								<option>English</option>
@@ -35,19 +46,23 @@
 						</select></li>
 					</ul>
 				</div>
-				<div class="col-sm-4 logo">
-					<a href="index.html"><img src="<c:url value="/images/logo.png"/>" alt=""></a>
+				<div class="col-md-4 logo">
+					<a href="index.html"><img
+						src="<c:url value="/images/logo.png"/>" alt=""></a>
 				</div>
 
-				<div class="col-sm-4 header-left">
+				<div class="col-md-4 header-left">
 					<p class="log">
-					<c:set var="buyerName" scope="session" value="${buyerName}"/>
-					<c:if test="${not empty buyerName}">
-						<span>欢迎您！${buyerName}</span> <a href="<c:url value="/user/loginout"/>">退出</a>
-					</c:if>
-					<c:if test="${empty buyerName}">
-						<a href="<c:url value="/user/login"/>"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户登录</a>
-					</c:if>
+						<c:set var="buyerName" scope="session" value="${buyerName}" />
+						<c:if test="${not empty buyerName}">
+							<span>欢迎您！${buyerName}</span>
+							<a href="<c:url value="/user/loginout"/>">退出</a>
+						</c:if>
+						<c:if test="${empty buyerName}">
+							<a href="<c:url value="/user/login"/>"> <span
+								class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户登录
+							</a>
+						</c:if>
 					</p>
 					<div class="cart box_1">
 						<a href="checkout.html">
@@ -70,10 +85,10 @@
 		</div>
 		<div class="container">
 			<div class="head-top">
-				<div class="col-sm-2 number">
+				<div class="col-md-2 number">
 					<span><i class="glyphicon glyphicon-phone"></i>123 456 789</span>
 				</div>
-				<div class="col-sm-8 h_menu4">
+				<div class="col-md-8 h_menu4">
 					<ul class="memenu skyblue">
 						<li class=" grid"><a href="<c:url value="/goods/index"/>">首页</a></li>
 						<li><a href="#">Men</a>
@@ -194,7 +209,7 @@
 						<li><a class="color6" href="contact.html">Conact</a></li>
 					</ul>
 				</div>
-				<div class="col-sm-2 search">
+				<div class="col-md-2 search">
 					<a class="play-icon popup-with-zoom-anim" href="#small-dialog"><i
 						class="glyphicon glyphicon-search"> </i> </a>
 				</div>
@@ -203,98 +218,80 @@
 					<div class="search-top">
 						<div class="login">
 							<input type="submit" value=""> <input type="text"
-								value="Type something..." onFocus="this.value = '';"
-								onBlur="if (this.value == '') {this.value = '';}">
+								value="Type something..." onfocus="this.value = '';"
+								onblur="if (this.value == '') {this.value = '';}">
 						</div>
 						<p>Shopping</p>
 					</div>
 				</div>
+				<!---->
 			</div>
 		</div>
 	</div>
-	<!--content-->
-	<div class="content">
-		<div class="container">
-			<div class="content-top">
-				<h1>Recent Products</h1>
-				<div class="content-top1">
+	<!---->
+	<div class="single">
 
-					<c:forEach var="entity" items="${goods}">
-						<div class="col-md-3 col-md2">
-							<div class="col-md1 simpleCart_shelfItem">
-								<a href="<c:url value="/goods/single/${entity.id}"/>"> <img class="img-responsive"
-									src="<c:url value="/images/${entity.picture}"/>" alt="" />
-								</a>
-								<h3>
-									<a href="single.html">${entity.name}</a>
-								</h3>
-								<div class="price">
-									<h5 class="item_price">${entity.price}</h5>
-									<a href="#" class="item_add">Add To Cart</a>
-									<div class="clearfix"></div>
-								</div>
-							</div>
+		<div class="container">
+			<div class="col-md-9">
+				<div class="col-md-5 grid">
+					<div class="flexslider">
+						<div class="thumb-image">
+							<img src="<c:url value="/images/${entity.picture }"/>"
+								data-imagezoom="true" class="img-responsive">
 						</div>
-					</c:forEach>
-					<div class="clearfix"></div>
+					</div>
 				</div>
+				<div class="col-md-7 single-top-in">
+					<div class="single-para simpleCart_shelfItem">
+						<h1>${entity.name }</h1>
+						<p>Contrary to popular belief, Lorem Ipsum is not simply
+							random text. It has roots in a piece of classical Latin
+							literature from 45 BC, making it over 2000 years old.It has roots
+							in a piece of classical Latin literature from 45 BC, making it
+							over 2000 years old.</p>
+						<div class="star-on">
+							<ul>
+								<li><a href="#"><i class="glyphicon glyphicon-star">
+									</i></a></li>
+								<li><a href="#"><i class="glyphicon glyphicon-star">
+									</i></a></li>
+								<li><a href="#"><i class="glyphicon glyphicon-star">
+									</i></a></li>
+								<li><a href="#"><i class="glyphicon glyphicon-star">
+									</i></a></li>
+								<li><a href="#"><i class="glyphicon glyphicon-star">
+									</i></a></li>
+							</ul>
+							<div class="review">
+								<a href="#"> 3 reviews </a>/ <a href="#"> Write a review</a>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+						<label class="add-to item_price">￥ ${entity.price }</label> <a
+							href="#" class="cart item_add">加入购物车</a>
+					</div>
+				</div>
+				<div class="clearfix"></div>
 			</div>
+			<div class="clearfix"></div>
 		</div>
 	</div>
-	<!--//content-->
 	<!--footer-->
 	<div class="footer">
+		<div class="container"></div>
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="clearfix"></div>
-				<p class="footer-class">
-					Copyright &copy; 2015.Company name All rights reserved.</a>
-				</p>
+				<p class="footer-class">Copyright &copy; 2015.Company name All
+					rights reserved.</p>
 			</div>
 		</div>
 	</div>
-
-	<!--//footer-->
+	<script src="<c:url value="/scripts/jquery.min.js"/>"></script>
+	<script src="<c:url value="/scripts/jquery.magnific-popup.js"/>"></script>
+	<script src="<c:url value="/scripts/simpleCart.min.js"/>"></script>
+	<script src="<c:url value="/scripts/responsiveslides.min.js"/>"></script>
+	<script src="<c:url value="/scripts/memenu.js"/>"></script>
 </body>
-<script src="<c:url value="/scripts/jquery.min.js"/>"></script>
-<script src="<c:url value="/scripts/jquery.magnific-popup.js"/>" ></script>
-<script src="<c:url value="/scripts/simpleCart.min.js"/>"></script>
-<script src="<c:url value="/scripts/responsiveslides.min.js"/>"></script>
-<script src="<c:url value="/scripts/memenu.js"/>"></script>
-<script type="application/x-javascript">
-	
-	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-
-</script>
-<script>
-	$(document).ready(function() {
-		$(".memenu").memenu();
-	});
-</script>
-<script>
-	$(document).ready(function() {
-		$('.popup-with-zoom-anim').magnificPopup({
-			type : 'inline',
-			fixedContentPos : false,
-			fixedBgPos : true,
-			overflowY : 'auto',
-			closeBtnInside : true,
-			preloader : false,
-			midClick : true,
-			removalDelay : 300,
-			mainClass : 'my-mfp-zoom-in'
-		});
-
-	});
-</script>
-<script>
-	$(function() {
-		$("#slider").responsiveSlides({
-			auto : true,
-			speed : 500,
-			namespace : "callbacks",
-			pager : true,
-		});
-	});
-</script>
 </html>
