@@ -14,7 +14,7 @@
 		<form action="<c:url value="/goods/deletes?pageNO=${pageNO}"/>" method="post">
 		<table border="1" width="100%" class="tab">
 			<tr>
-				<th><input type="checkbox" id="chbAll"></th>
+				<th></th>
 				<th>编号</th>
 				<th>产品名</th>
 				<th>价格</th>
