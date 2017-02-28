@@ -21,7 +21,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript">
 	
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 
 </script>
@@ -56,7 +58,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<c:set var="buyerName" scope="session" value="${buyerName}" />
 						<c:if test="${not empty buyerName}">
 							<span>欢迎您！${buyerName}</span>
-							<a href="<c:url value="/user/loginout"/>">退出</a>
+							<a href="<c:url value="/user/loginout"/>" class="simpleCart_empty">退出</a>
 						</c:if>
 						<c:if test="${empty buyerName}">
 							<a href="<c:url value="/user/login"/>"> <span
@@ -65,7 +67,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</c:if>
 					</p>
 					<div class="cart box_1">
-						<a href="checkout.html">
+						<a href="javascript:;" data-toggle="modal"
+							data-target=".bs-example-modal-lg">
 							<h3>
 								<div class="total">
 									<span class="simpleCart_total"></span>
@@ -74,13 +77,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</h3>
 						</a>
 						<p>
-							<a href="javascript:;" class="simpleCart_empty">Empty Cart</a>
+							<a href="javascript:;" class="simpleCart_empty">清空购物车</a>
 						</p>
 
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="modal fade bs-example-modal-lg" tabindex="-1"
+			role="dialog" aria-labelledby="myLargeModalLabel">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="simpleCart_items">
+						<!--数据加载前显示的内容 开始-->
+						<div style="text-align: center;">购物车数据加载中...请稍待.</div>
+						<!--数据加载前显示的内容 结束-->
+					</div>
+					 总计<div class="simpleCart_total"></div>
+				</div>
 			</div>
 		</div>
 		<div class="container">
@@ -232,18 +248,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="single">
 
 		<div class="container">
-			<div class="col-md-9">
+			<div class="col-md-9 simpleCart_shelfItem">
 				<div class="col-md-5 grid">
 					<div class="flexslider">
-						<div class="thumb-image">
-							<img src="<c:url value="/images/${entity.picture }"/>"
-								data-imagezoom="true" class="img-responsive">
-						</div>
+						<img src="<c:url value="/images/${entity.picture }"/>"
+							data-imagezoom="true" class="img-responsive item_image">
 					</div>
 				</div>
 				<div class="col-md-7 single-top-in">
-					<div class="single-para simpleCart_shelfItem">
-						<h1>${entity.name }</h1>
+					<div class="single-para">
+						<h1 class="item_name">${entity.name }</h1>
 						<p>Contrary to popular belief, Lorem Ipsum is not simply
 							random text. It has roots in a piece of classical Latin
 							literature from 45 BC, making it over 2000 years old.It has roots
@@ -293,5 +307,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script src="<c:url value="/scripts/simpleCart.min.js"/>"></script>
 	<script src="<c:url value="/scripts/responsiveslides.min.js"/>"></script>
 	<script src="<c:url value="/scripts/memenu.js"/>"></script>
+	<script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
+	<script type="text/javascript">
+		simpleCart({
+			cartColumns : [ {
+				attr : "name",
+				label : "商品名称"
+			}, {
+				attr : "image",
+				label : "图片",
+				view : "image"
+			}, {
+				attr : "price",
+				label : "￥价格"
+			}, {
+				attr : "quantity",
+				label : "数量",
+				view : "input"
+			}, {
+				attr : "total",
+				label : "￥总价"
+			}, {
+				view : "remove",
+				text : "删除",
+				label : false
+			} ],
+			cartStyle : "table"
+		});
+	</script>
 </body>
 </html>

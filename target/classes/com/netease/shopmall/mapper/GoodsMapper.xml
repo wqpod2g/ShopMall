@@ -12,6 +12,10 @@
 		select
 		id,name,price,picture from goods where id=#{id}
 	</select>
+	
+	<select id="getAllGoods" resultType="Goods">
+		select * from goods
+	</select>
 	<!--获得商品总数 -->
 	<select id="getGoodsCount" resultType="int">
 		select count(*) from goods
