@@ -45,7 +45,8 @@
 						<c:set var="buyerName" scope="session" value="${buyerName}" />
 						<c:if test="${not empty buyerName}">
 							<span>欢迎您！${buyerName}</span>
-							<a href="<c:url value="/user/loginout"/>" class="simpleCart_empty">退出</a>
+							<a href="<c:url value="/user/loginout"/>"
+								class="simpleCart_empty">退出</a>
 						</c:if>
 						<c:if test="${empty buyerName}">
 							<a href="<c:url value="/user/login"/>"> <span
@@ -243,26 +244,30 @@
 
 					<c:forEach var="entity" items="${goods}">
 						<div class="col-md-3 col-md2">
-							<div class="col-md1 simpleCart_shelfItem">
-								<a href="<c:url value="/goods/single/${entity.id}"/>"> <img
-									class="img-responsive item_image"
-									src="<c:url value="/images/${entity.picture}"/>" alt=""
-									width="200" height="200" />
-								</a>
-								<h3>
-									<a href="single.html" class="item_name">${entity.name}</a>
-								</h3>
-								<div class="price">
-									<h5 class="item_price">${entity.price}</h5>
-									<c:if test="${empty buyerName}">
-										<a href="<c:url value="/user/login"/>">加入购物车</a>
-									</c:if>
-									<c:if test="${not empty buyerName}">
-										<a href="javascript:;" class="item_add">加入购物车</a>
-									</c:if>
-									<div class="clearfix"></div>
+								<input type="hidden" value="${entity.id}" name="id" class="id"> 
+								<input type="hidden" value="${entity.picture}" name="picture" class="picture">
+								<input type="hidden" value="${entity.name}" name="name" class="name">
+								<input type="hidden" value="${entity.price}" name="price" class="price">
+								<div class="col-md1 simpleCart_shelfItem">
+									<a href="<c:url value="/goods/single/${entity.id}"/>"> <img
+										class="img-responsive item_image"
+										src="<c:url value="/images/${entity.picture}"/>" alt=""
+										width="200" height="200" />
+									</a>
+									<h3>
+										<a href="single.html" class="item_name">${entity.name}</a>
+									</h3>
+									<div class="price">
+										<h5 class="item_price">${entity.price}</h5>
+										<c:if test="${empty buyerName}">
+											<a href="<c:url value="/user/login"/>">加入购物车</a>
+										</c:if>
+										<c:if test="${not empty buyerName}">
+											<a href="javascript:;" class="item_add">加入购物车</a>
+										</c:if>
+										<div class="clearfix"></div>
+									</div>
 								</div>
-							</div>
 						</div>
 					</c:forEach>
 					<div class="clearfix"></div>
@@ -284,6 +289,7 @@
 	</div>
 
 	<!--//footer-->
+	<button class="cart" value="button">button</button>
 </body>
 <script src="<c:url value="/scripts/jquery.min.js"/>"></script>
 <script src="<c:url value="/scripts/jquery.magnific-popup.js"/>"></script>
@@ -291,7 +297,28 @@
 <script src="<c:url value="/scripts/responsiveslides.min.js"/>"></script>
 <script src="<c:url value="/scripts/memenu.js"/>"></script>
 <script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
-
+<script type="text/javascript">
+	$("a.item_add").click(function() {
+		var index = $(this).parent().parent();
+		var price = index.siblings(".price").attr("value");
+		var name = index.siblings(".name").attr("value");
+		var id = index.siblings(".id").attr("value");
+		var picture = index.siblings(".picture").attr("value");
+		$.ajax({
+			type : 'POST',
+			url : "<c:url value="/cart/addItem"/>",
+			data : {
+				"id" : id,
+				"name" : name,
+				"picture" : picture,
+				"price" : price
+			},
+			success : function(msg) {
+				alert(msg);
+			}
+		});
+	});
+</script>
 <script type="text/javascript">
 	simpleCart({
 		cartColumns : [ {
@@ -323,10 +350,7 @@
 
 <script type="application/x-javascript">
 	
-	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-
-
 
 </script>
 <script>

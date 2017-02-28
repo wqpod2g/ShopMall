@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +23,7 @@ import com.netease.shopmall.utils.CommonUtil;
 @RequestMapping("/goods")
 public class GoodsController {
 	
+	
 	@Resource
 	GoodsService goodsService;
 	
@@ -31,7 +31,7 @@ public class GoodsController {
 	 * 首页展示
 	 */
 	@RequestMapping("/index")
-	public String index(Model model,@RequestParam(required=false,defaultValue="1") int pageNO,HttpServletRequest request){
+	public String index(Model model,HttpServletRequest request){
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("buyerUser");
 		if(user!=null) {
@@ -40,10 +40,6 @@ public class GoodsController {
 		else {
 			model.addAttribute("buyerName","");
 		}
-		int size=10;
-		model.addAttribute("size",size);
-		model.addAttribute("pageNO",pageNO);
-		model.addAttribute("count",goodsService.getGoodsCount());
 		model.addAttribute("goods", goodsService.getAllGoods());
 		return "/goods/index";
 	}
