@@ -12,6 +12,12 @@ public interface GoodsDAO {
 	public List<Goods> getGoodsPager(@Param("skip") int skip,@Param("size") int size);
 	
 	/**
+	 * 获取所有商品
+	 * @return
+	 */
+	public List<Goods> getAllGoods();
+	
+	/**
 	 * 获得单个商品通过编号
 	 */
 	public Goods getGoodsById(int id);

@@ -44,7 +44,7 @@ public class GoodsController {
 		model.addAttribute("size",size);
 		model.addAttribute("pageNO",pageNO);
 		model.addAttribute("count",goodsService.getGoodsCount());
-		model.addAttribute("goods", goodsService.getGoodsPager(pageNO, size));
+		model.addAttribute("goods", goodsService.getAllGoods());
 		return "/goods/index";
 	}
 	

@@ -67,4 +67,9 @@ public class GoodsServiceImpl implements GoodsService{
 		return goodsdao.update(entity);
 	}
 
+	//获取所有商品
+	public List<Goods> getAllGoods() {
+		return goodsdao.getAllGoods();
+	}
+
 }

@@ -38,6 +38,18 @@ public class TestGoods{
 		}
 	}
 	
+	@Test
+	public void getAllGoodsTest() {
+		SqlSession session=MyBatisUtil.getSession();
+		try {
+			GoodsDAO bookdao=session.getMapper(GoodsDAO.class);
+			List<Goods> goods=bookdao.getAllGoods();
+			Assert.assertEquals(14, goods.size());
+		} finally {
+			session.close();
+		}
+	}
+	
 //	@Test
 //	public void getGoodsCountTest() {
 //		SqlSession session=MyBatisUtil.getSession();

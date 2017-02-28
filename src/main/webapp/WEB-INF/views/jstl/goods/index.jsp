@@ -36,21 +36,26 @@
 					</ul>
 				</div>
 				<div class="col-sm-4 logo">
-					<a href="index.html"><img src="<c:url value="/images/logo.png"/>" alt=""></a>
+					<a href="index.html"><img
+						src="<c:url value="/images/logo.png"/>" alt=""></a>
 				</div>
 
 				<div class="col-sm-4 header-left">
 					<p class="log">
-					<c:set var="buyerName" scope="session" value="${buyerName}"/>
-					<c:if test="${not empty buyerName}">
-						<span>欢迎您！${buyerName}</span> <a href="<c:url value="/user/loginout"/>">退出</a>
-					</c:if>
-					<c:if test="${empty buyerName}">
-						<a href="<c:url value="/user/login"/>"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户登录</a>
-					</c:if>
+						<c:set var="buyerName" scope="session" value="${buyerName}" />
+						<c:if test="${not empty buyerName}">
+							<span>欢迎您！${buyerName}</span>
+							<a href="<c:url value="/user/loginout"/>" class="simpleCart_empty">退出</a>
+						</c:if>
+						<c:if test="${empty buyerName}">
+							<a href="<c:url value="/user/login"/>"> <span
+								class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户登录
+							</a>
+						</c:if>
 					</p>
 					<div class="cart box_1">
-						<a href="checkout.html">
+						<a href="javascript:;" data-toggle="modal"
+							data-target=".bs-example-modal-lg">
 							<h3>
 								<div class="total">
 									<span class="simpleCart_total"></span>
@@ -59,7 +64,7 @@
 							</h3>
 						</a>
 						<p>
-							<a href="javascript:;" class="simpleCart_empty">Empty Cart</a>
+							<a href="javascript:;" class="simpleCart_empty">清空购物车</a>
 						</p>
 
 					</div>
@@ -212,6 +217,23 @@
 			</div>
 		</div>
 	</div>
+
+
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+		aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="simpleCart_items">
+					<!--数据加载前显示的内容 开始-->
+					<div style="text-align: center;">购物车数据加载中...请稍待.</div>
+					<!--数据加载前显示的内容 结束-->
+				</div>
+				总计
+				<div class="simpleCart_total"></div>
+			</div>
+		</div>
+	</div>
+
 	<!--content-->
 	<div class="content">
 		<div class="container">
@@ -222,15 +244,22 @@
 					<c:forEach var="entity" items="${goods}">
 						<div class="col-md-3 col-md2">
 							<div class="col-md1 simpleCart_shelfItem">
-								<a href="<c:url value="/goods/single/${entity.id}"/>"> <img class="img-responsive"
-									src="<c:url value="/images/${entity.picture}"/>" alt="" />
+								<a href="<c:url value="/goods/single/${entity.id}"/>"> <img
+									class="img-responsive item_image"
+									src="<c:url value="/images/${entity.picture}"/>" alt=""
+									width="200" height="200" />
 								</a>
 								<h3>
-									<a href="single.html">${entity.name}</a>
+									<a href="single.html" class="item_name">${entity.name}</a>
 								</h3>
 								<div class="price">
 									<h5 class="item_price">${entity.price}</h5>
-									<a href="#" class="item_add">Add To Cart</a>
+									<c:if test="${empty buyerName}">
+										<a href="<c:url value="/user/login"/>">加入购物车</a>
+									</c:if>
+									<c:if test="${not empty buyerName}">
+										<a href="javascript:;" class="item_add">加入购物车</a>
+									</c:if>
 									<div class="clearfix"></div>
 								</div>
 							</div>
@@ -257,13 +286,47 @@
 	<!--//footer-->
 </body>
 <script src="<c:url value="/scripts/jquery.min.js"/>"></script>
-<script src="<c:url value="/scripts/jquery.magnific-popup.js"/>" ></script>
+<script src="<c:url value="/scripts/jquery.magnific-popup.js"/>"></script>
 <script src="<c:url value="/scripts/simpleCart.min.js"/>"></script>
 <script src="<c:url value="/scripts/responsiveslides.min.js"/>"></script>
 <script src="<c:url value="/scripts/memenu.js"/>"></script>
+<script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
+
+<script type="text/javascript">
+	simpleCart({
+		cartColumns : [ {
+			attr : "name",
+			label : "商品名称"
+		}, {
+			attr : "image",
+			label : "图片",
+			view : "image"
+		}, {
+			attr : "price",
+			label : "￥价格"
+		}, {
+			attr : "quantity",
+			label : "数量",
+			view : "input"
+		}, {
+			attr : "total",
+			label : "￥总价"
+		}, {
+			view : "remove",
+			text : "删除",
+			label : false
+		} ],
+		cartStyle : "table"
+	});
+</script>
+
+
 <script type="application/x-javascript">
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
 
 </script>
 <script>

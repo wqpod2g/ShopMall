@@ -12,6 +12,9 @@ public interface GoodsService {
 
 	//分页
 	List<Goods> getGoodsPager(int pageNO, int size);
+	
+	//获取所有商品
+	List<Goods> getAllGoods();
 
 	//获得单个商品对象
 	Goods getGoodsById(int id);
