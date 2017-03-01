@@ -23,7 +23,7 @@ public class CartServiceImpl implements CartService{
 	public void saveItem(Goods entity, String username) {
 		Jedis jedis = JedisPoolUtils.getInstance().getJedis();
 		String goodsJsonStr =  JSONObject.fromObject(entity).toString();
-		logger.info("goodsJson="+goodsJsonStr);
+		logger.info("saveItem "+goodsJsonStr+" to "+username+"'s shopcart");
 		if(!jedis.hexists("shopcart:"+username,entity.getId()+"")) {
 			jedis.hset("shopcart:"+username, entity.getId()+"",goodsJsonStr);
 		}
@@ -47,8 +47,27 @@ public class CartServiceImpl implements CartService{
 			JSONObject goodJson = JSONObject.fromObject(jedis.hget("shopcart:"+username, key));
 			goodsJson.put(key, goodJson);
 		}
-		logger.info(goodsJson.toString());
+		logger.info("CartServiceImpl getAllItem "+username+" "+goodsJson.toString());
+		JedisPoolUtils.getInstance().returnRes(jedis);
 		return goodsJson.toString();
+	}
+
+	//清空购物车
+	@Override
+	public void emptyCart(String username) {
+		Jedis jedis = JedisPoolUtils.getInstance().getJedis();
+		jedis.del("shopcart:"+username);
+		JedisPoolUtils.getInstance().returnRes(jedis);
+		logger.info("empty "+username+"'s shopcart");
+	}
+
+	@Override
+	public void deleteItem(String username, int id) {
+		Jedis jedis = JedisPoolUtils.getInstance().getJedis();
+		jedis.hdel("shopcart:"+username, id+"");
+		JedisPoolUtils.getInstance().returnRes(jedis);
+		logger.info("delete "+username+"'s item "+id);
+		
 	}
 
 }
