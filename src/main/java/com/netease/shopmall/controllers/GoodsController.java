@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.netease.shopmall.entities.Goods;
 import com.netease.shopmall.entities.User;
+import com.netease.shopmall.services.CartService;
 import com.netease.shopmall.services.GoodsService;
 import com.netease.shopmall.utils.CommonUtil;
 
@@ -27,6 +29,9 @@ public class GoodsController {
 	@Resource
 	GoodsService goodsService;
 	
+	@Resource
+	CartService cartservice;
+	
 	/*
 	 * 首页展示
 	 */
@@ -36,6 +41,7 @@ public class GoodsController {
 		User user = (User) session.getAttribute("buyerUser");
 		if(user!=null) {
 			model.addAttribute("buyerName",user.getName());
+			model.addAttribute("simpleCart_items",cartservice.getAllItem(user.getName()));
 		}
 		else {
 			model.addAttribute("buyerName","");

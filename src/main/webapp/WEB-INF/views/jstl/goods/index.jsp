@@ -250,7 +250,7 @@
 								<input type="hidden" value="${entity.price}" name="price" class="price">
 								<div class="col-md1 simpleCart_shelfItem">
 									<a href="<c:url value="/goods/single/${entity.id}"/>"> <img
-										class="img-responsive item_image"
+										class="img-responsive item_picture"
 										src="<c:url value="/images/${entity.picture}"/>" alt=""
 										width="200" height="200" />
 									</a>
@@ -298,6 +298,11 @@
 <script src="<c:url value="/scripts/memenu.js"/>"></script>
 <script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
 <script type="text/javascript">
+    var name = "${buyerName}";
+    if(name!="") {
+    	var str = '${simpleCart_items}';
+    	 localStorage.simpleCart_items = str;
+    }
 	$("a.item_add").click(function() {
 		var index = $(this).parent().parent();
 		var price = index.siblings(".price").attr("value");
@@ -325,7 +330,7 @@
 			attr : "name",
 			label : "商品名称"
 		}, {
-			attr : "image",
+			attr : "picture",
 			label : "图片",
 			view : "image"
 		}, {
