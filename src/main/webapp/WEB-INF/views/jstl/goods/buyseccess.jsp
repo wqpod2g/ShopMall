@@ -22,20 +22,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 	<div class="container">
 		<div class="check-out">
-			<h1>填写订单</h1>
-			<table id="container">
-				<tr>
-					<th>商品</th>
-					<th>数量</th>
-					<th>单价（￥）</th>
-					<th>总价（￥）</th>
-				</tr>
-			</table>
-			合计:
-			<div class="simpleCart_total"></div>
-			<a href="<c:url value="/cart/buyall"/>" class="to-buy" id="tobuy">提交订单</a> <a
-				href="<c:url value="/goods/index"/>" class="to-buy">退出</a>
-			<div class="clearfix"></div>
+			<h1 class="bg-success">下单成功！<span class="glyphicon glyphicon-ok" ></span></h1>
+			<h1><a class="btn btn-danger" href="<c:url value="/goods/index"/>">返回首页</a></h1>
 		</div>
 	</div>
 	<!--footer-->
