@@ -35,6 +35,20 @@ public class Goods implements Serializable {
 	 */
 	private String picture;
 	
+	//数量
+	private int quantity = 1;
+	
+	
+	
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 	public Goods() {
 	}
 	
