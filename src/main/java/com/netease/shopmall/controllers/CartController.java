@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.netease.shopmall.entities.Goods;
@@ -69,6 +70,24 @@ public class CartController {
 		out.write("删除商品成功！");
 		out.flush();
 		out.close();
+	}
+	//结算页面
+	@RequestMapping("/gotobuy")
+	public String gotobuy(Model model,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("buyerUser");
+		if(user==null) return "/account/login";
+		return "/goods/checkout";
+	}
+	//下单
+	@RequestMapping("/buyall")
+	public String buyall(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("buyerUser");
+		if(user==null) return "/account/login";
+		logger.info(user.getName()+" buyall items");
+		cartservice.emptyCart(user.getName());
+		return "/goods/buyseccess";
 	}
 
 }

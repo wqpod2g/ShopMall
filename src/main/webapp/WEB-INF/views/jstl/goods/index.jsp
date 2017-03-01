@@ -13,7 +13,6 @@
 	type="text/css" media="all" />
 <link href="<c:url value="/styles/popuo-box.css"/>" rel="stylesheet"
 	type="text/css" media="all" />
-<script src="<c:url value="/scripts/jquery.min.js"/>"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
@@ -45,8 +44,9 @@
 					<p class="log">
 						<c:set var="buyerName" scope="session" value="${buyerName}" />
 						<c:if test="${not empty buyerName}">
-							<span>欢迎您！${buyerName}</span>
+							<span>欢迎您！${buyerName}</span><br>
 							<a href="<c:url value="/user/loginout"/>" class="loginout">退出</a>
+							<a href="<c:url value="/user/order"/>">财务</a>
 						</c:if>
 						<c:if test="${empty buyerName}">
 							<a href="<c:url value="/user/login"/>"> <span
@@ -76,7 +76,7 @@
 		</div>
 		<div class="container">
 			<div class="head-top">
-				<div class="col-sm-2 number">
+			<div class="col-md-2 number">
 					<span><i class="glyphicon glyphicon-phone"></i>123 456 789</span>
 				</div>
 				<div class="col-sm-8 h_menu4">
@@ -200,21 +200,7 @@
 						<li><a class="color6" href="contact.html">Conact</a></li>
 					</ul>
 				</div>
-				<div class="col-sm-2 search">
-					<a class="play-icon popup-with-zoom-anim" href="#small-dialog"><i
-						class="glyphicon glyphicon-search"> </i> </a>
-				</div>
 				<div class="clearfix"></div>
-				<div id="small-dialog" class="mfp-hide">
-					<div class="search-top">
-						<div class="login">
-							<input type="submit" value=""> <input type="text"
-								value="Type something..." onFocus="this.value = '';"
-								onBlur="if (this.value == '') {this.value = '';}">
-						</div>
-						<p>Shopping</p>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -229,8 +215,8 @@
 					<div style="text-align: center;">购物车数据加载中...请稍待.</div>
 					<!--数据加载前显示的内容 结束-->
 				</div>
-				总计
-				<div class="simpleCart_total"></div>
+				<div class="col-md1">合计:<div class="simpleCart_total"></div>
+				<a class="btn btn-success" href="<c:url value="/cart/gotobuy"/>">去 结 算</a></div>
 			</div>
 		</div>
 	</div>
@@ -293,8 +279,8 @@
 	</div>
 
 	<!--//footer-->
-	<button class="cart" value="button">button</button>
 </body>
+<script src="<c:url value="/scripts/jquery.min.js"/>"></script>
 <script src="<c:url value="/scripts/jquery.magnific-popup.js"/>"></script>
 <script src="<c:url value="/scripts/simpleCart.min.js"/>"></script>
 <script src="<c:url value="/scripts/responsiveslides.min.js"/>"></script>
@@ -339,8 +325,16 @@
 			}
 		});
 	});
+	
 </script>
 <script type="text/javascript">
+
+	simpleCart.currency({
+		code : "RMB",
+		name : "RMB",
+		symbol : "￥"
+	});
+
 	simpleCart({
 		cartColumns : [ {
 			attr : "id",
