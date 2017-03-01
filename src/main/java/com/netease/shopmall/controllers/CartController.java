@@ -44,5 +44,31 @@ public class CartController {
 		out.flush();
 		out.close();
 	}
+	
+	//清空购物车
+	@RequestMapping("/empty")
+	public void emptyCart(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("buyerUser");
+		if(user==null) return;
+		cartservice.emptyCart(user.getName());
+		PrintWriter out = response.getWriter();
+		out.write("清空购物车成功！");
+		out.flush();
+		out.close();
+	}
+	//删除购物车的某件商品
+	@RequestMapping("/deleteItem")
+	public void deleteItem(int id,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		logger.info("deleteItem id="+id);
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("buyerUser");
+		if(user==null) return;
+		cartservice.deleteItem(user.getName(),id);
+		PrintWriter out = response.getWriter();
+		out.write("删除商品成功！");
+		out.flush();
+		out.close();
+	}
 
 }

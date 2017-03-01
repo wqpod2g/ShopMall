@@ -14,5 +14,11 @@ public interface CartService {
 	
 	//从购物车中取出所有商品
 	public String getAllItem(String username);
+	
+	//清空某个用户的购物车
+	public void emptyCart(String username);
+	
+	//删除某件商品
+	public void deleteItem(String username,int id);
 
 }
