@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.netease.shopmall.entities.User;
+import com.netease.shopmall.services.CartService;
 import com.netease.shopmall.services.UserService;
 
 
@@ -23,6 +24,9 @@ public class UserController {
 	
 	@Resource
 	UserService userService;
+	
+	@Resource
+	CartService cartservice;
 	
 	@RequestMapping("/login")
 	public String login() {
@@ -56,6 +60,15 @@ public class UserController {
 		session.setAttribute("buyerUser", null);
 		session.setAttribute("sellerUser", null);
 		return "redirect:/goods/index";
+	}
+	
+	@RequestMapping("/checkbill")
+	public String checkbill(Model model,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("buyerUser");
+		if(user==null) return "/account/login";
+		model.addAttribute("orders", cartservice.getAllOrders(user.getName()));
+		return "/goods/bill";
 	}
 
 }

@@ -46,7 +46,7 @@
 						<c:if test="${not empty buyerName}">
 							<span>欢迎您！${buyerName}</span><br>
 							<a href="<c:url value="/user/loginout"/>" class="loginout">退出</a>
-							<a href="<c:url value="/user/order"/>">财务</a>
+							<a href="<c:url value="/user/checkbill"/>">财务</a>
 						</c:if>
 						<c:if test="${empty buyerName}">
 							<a href="<c:url value="/user/login"/>"> <span
