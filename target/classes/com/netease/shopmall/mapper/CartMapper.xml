@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.netease.shopmall.mapper.CartDAO">
+	<insert id="insert" parameterType="Orders">
+		insert into
+		sorder(pname,price,picture,username,buydate,pid,quantity) values(#{pname},#{price},#{picture},#{username},#{buydate},#{pid},#{quantity});
+	</insert>
+	
+	<select id="getAllOrders" parameterType="string" resultType="Orders">
+		select * from sorder where username=#{username}
+	</select>
+	
+</mapper>

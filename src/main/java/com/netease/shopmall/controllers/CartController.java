@@ -2,18 +2,15 @@ package com.netease.shopmall.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.netease.shopmall.entities.Goods;
 import com.netease.shopmall.entities.User;
 import com.netease.shopmall.services.CartService;
@@ -86,6 +83,7 @@ public class CartController {
 		User user = (User) session.getAttribute("buyerUser");
 		if(user==null) return "/account/login";
 		logger.info(user.getName()+" buyall items");
+		cartservice.inserDB(user.getName());
 		cartservice.emptyCart(user.getName());
 		return "/goods/buyseccess";
 	}

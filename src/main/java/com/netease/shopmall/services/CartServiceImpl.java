@@ -1,6 +1,11 @@
 package com.netease.shopmall.services;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
+
+import javax.annotation.Resource;
 
 import net.sf.json.JSONObject;
 
@@ -11,12 +16,17 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
 import com.netease.shopmall.entities.Goods;
+import com.netease.shopmall.entities.Orders;
+import com.netease.shopmall.mapper.CartDAO;
 import com.netease.shopmall.utils.JedisPoolUtils;
 
 @Service
 public class CartServiceImpl implements CartService{
 	
 	private static final Logger logger = LoggerFactory.getLogger(CartService.class);
+	
+	@Resource
+	CartDAO cartdao;
 
 	//保存用户购物车商品至redis
 	@Override
@@ -68,6 +78,43 @@ public class CartServiceImpl implements CartService{
 		JedisPoolUtils.getInstance().returnRes(jedis);
 		logger.info("delete "+username+"'s item "+id);
 		
+	}
+
+	@Override
+	public List<Orders> getOrders(String username) {
+		List<Orders> relist = new ArrayList<Orders>();
+		JSONObject goodsJson = JSONObject.fromObject(getAllItem(username));
+		@SuppressWarnings("unchecked")
+		Set<String> keySet = goodsJson.keySet();
+		for(String key:keySet) {
+			logger.info("key="+key);
+			Orders order = new Orders();
+			JSONObject goodJson = (JSONObject) goodsJson.get(key);
+			order.setPid(Integer.valueOf(goodJson.get("id").toString())); 
+			logger.info("pid="+Integer.valueOf(goodJson.get("id").toString()));
+			order.setBuydate(new Date());
+			order.setPicture(goodJson.get("picture").toString());
+			logger.info("picture="+goodJson.get("picture").toString());
+			order.setPname(goodJson.get("name").toString());
+			order.setQuantity(Integer.valueOf(goodJson.get("quantity").toString()));
+			order.setPrice(Double.valueOf(goodJson.get("price").toString()));
+			order.setUsername(username);
+			relist.add(order);
+		}
+		return relist;
+	}
+
+	@Override
+	public void inserDB(String username) {
+		List<Orders> list = getOrders(username);
+		for(Orders order:list) {
+			cartdao.insert(order);
+		}
+	}
+
+	@Override
+	public List<Orders> getAllOrders(String username) {
+		return cartdao.getAllOrders(username);
 	}
 
 }
