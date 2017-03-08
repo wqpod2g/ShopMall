@@ -57,7 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</h3>
 						</a>
 						<p>
-							<a href="javascript:;" class="simpleCart_empty">Empty Cart</a>
+							<a href="javascript:;" class="simpleCart_empty">清空购物车</a>
 						</p>
 
 					</div>
@@ -219,7 +219,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<form action="<c:url value="/user/checkLogin"/>">
 
 						<span>用户名</span> <input type="text" name="name">
-						<span>密码</span> <input type="text" name="pass">
+						<span>密码</span> <input type="text" name="pass1" id="pass1">
+						<input type="hidden" type="text" name="pass" id="pass">
 
 						<div class="word-in">
 							我是买家&nbsp; <input type="radio" checked="checked" name="flag"
@@ -232,13 +233,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 					</form>
 				</div>
-				<div class="col-md-6 login-left">
-					<h4>NEW CUSTOMERS</h4>
-					<p>By creating an account with our store, you will be able to
-						move through the checkout process faster, store multiple shipping
-						addresses, view and track your orders in your account and more.</p>
-					<a class="acount-btn" href="register.html">Create an Account</a>
-				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -250,8 +244,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="container">
 				<div class="clearfix"></div>
 				<p class="footer-class">
-					Copyright &copy; 2015.Company name All rights reserved.<a
-						target="_blank" href="http://www.cssmoban.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+					Copyright &copy; 2015.Company name All rights reserved.
 				</p>
 			</div>
 		</div>
@@ -260,11 +253,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!--//footer-->
 </body>
 <script src="<c:url value="/scripts/jquery.min.js"/>"></script>
-<script src="<c:url value="/scripts/jquery.magnific-popup.js"/>"
-	type="text/javascript"></script>
+<script src="<c:url value="/scripts/md5.js"/>"></script>
+<script src="<c:url value="/scripts/jquery.magnific-popup.js"/>"></script>
 <script type="application/x-javascript">
-	
-	
+$("form").submit(function() {
+	var hash = md5($("input#pass1").val());
+	$("input#pass").val(hash);
+	$("input#pass1").attr("disabled", "true");
+});
 	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 
