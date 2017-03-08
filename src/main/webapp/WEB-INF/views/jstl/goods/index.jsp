@@ -44,7 +44,8 @@
 					<p class="log">
 						<c:set var="buyerName" scope="session" value="${buyerName}" />
 						<c:if test="${not empty buyerName}">
-							<span>欢迎您！${buyerName}</span><br>
+							<span>欢迎您！${buyerName}</span>
+							<br>
 							<a href="<c:url value="/user/loginout"/>" class="loginout">退出</a>
 							<a href="<c:url value="/user/checkbill"/>">财务</a>
 						</c:if>
@@ -76,7 +77,7 @@
 		</div>
 		<div class="container">
 			<div class="head-top">
-			<div class="col-md-2 number">
+				<div class="col-md-2 number">
 					<span><i class="glyphicon glyphicon-phone"></i>123 456 789</span>
 				</div>
 				<div class="col-sm-8 h_menu4">
@@ -215,8 +216,12 @@
 					<div style="text-align: center;">购物车数据加载中...请稍待.</div>
 					<!--数据加载前显示的内容 结束-->
 				</div>
-				<div class="col-md1">合计:<div class="simpleCart_total"></div>
-				<a class="btn btn-success" href="<c:url value="/cart/gotobuy"/>">去 结 算</a></div>
+				<div class="col-md1">
+					合计:
+					<div class="simpleCart_total"></div>
+					<a class="btn btn-success" href="<c:url value="/cart/gotobuy"/>">去
+						结 算</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -319,16 +324,16 @@
 			type : 'POST',
 			url : "<c:url value="/cart/deleteItem"/>",
 			data : {
-				"id" :id
+				"id" : id
 			},
 			success : function(msg) {
 			}
 		});
 	});
-	
+	simpleCart.bind('update', function() {
+	});
 </script>
 <script type="text/javascript">
-
 	simpleCart.currency({
 		code : "RMB",
 		name : "RMB",
@@ -371,7 +376,13 @@
 	
 	
 	
+	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+
 
 
 
