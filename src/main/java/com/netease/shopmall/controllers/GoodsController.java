@@ -188,7 +188,15 @@ public class GoodsController {
 	}
 	
 	@RequestMapping("/single/{id}")
-	public String goodsDetail(Model model,@PathVariable int id) {
+	public String goodsDetail(Model model,@PathVariable int id,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("buyerUser");
+		if(user!=null) {
+			model.addAttribute("buyerName",user.getName());
+		}
+		else {
+			model.addAttribute("buyerName","");
+		}
 		Goods entity = goodsService.getGoodsById(id);
 		model.addAttribute("entity", entity);
 		return "/goods/single";

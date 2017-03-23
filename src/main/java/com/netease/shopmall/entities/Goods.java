@@ -38,8 +38,18 @@ public class Goods implements Serializable {
 	//数量
 	private int quantity = 1;
 	
+	//商品信息
+	private String info;
 	
 	
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
 
 	public int getQuantity() {
 		return quantity;

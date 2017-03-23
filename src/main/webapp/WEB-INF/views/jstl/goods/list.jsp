@@ -26,7 +26,8 @@
 				<tr>
 					<th></th>
 					<th>编号</th>
-					<th>产品名</th>
+					<th>商品名</th>
+					<th>商品信息</th>
 					<th>价格</th>
 					<th>类型</th>
 					<th>操作</th>
@@ -36,6 +37,7 @@
 						<th><input type="checkbox" name="id" value="${entity.id}"></th>
 						<td>${entity.id}</td>
 						<td>${entity.name}</td>
+						<td>${entity.info}</td>
 						<td><img src="<c:url value="/images/${entity.picture}"/>"
 							height="40" /></td>
 						<td>${entity.price}</td>
