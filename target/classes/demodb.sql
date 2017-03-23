@@ -10,149 +10,72 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-02-25 00:55:44
+Date: 2017-03-23 21:04:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for `account`
--- ----------------------------
-DROP TABLE IF EXISTS `account`;
-CREATE TABLE `account` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `login` varchar(20) DEFAULT NULL,
-  `name` varchar(20) DEFAULT NULL,
-  `pass` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of account
--- ----------------------------
-
--- ----------------------------
--- Table structure for `busorder`
--- ----------------------------
-DROP TABLE IF EXISTS `busorder`;
-CREATE TABLE `busorder` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `remark` varchar(200) DEFAULT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `total` double(8,2) DEFAULT NULL,
-  `post` varchar(20) DEFAULT NULL,
-  `address` varchar(32) DEFAULT NULL,
-  `sid` int(11) DEFAULT NULL,
-  `uid` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKBBFB18CE873F25D4` (`uid`),
-  KEY `FKBBFB18CEAA0F7839` (`sid`),
-  CONSTRAINT `FKBBFB18CE873F25D4` FOREIGN KEY (`uid`) REFERENCES `user` (`id`),
-  CONSTRAINT `FKBBFB18CEAA0F7839` FOREIGN KEY (`sid`) REFERENCES `status` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of busorder
--- ----------------------------
-
--- ----------------------------
--- Table structure for `category`
--- ----------------------------
-DROP TABLE IF EXISTS `category`;
-CREATE TABLE `category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(20) DEFAULT NULL,
-  `hot` tinyint(1) DEFAULT '0',
-  `aid` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK302BCFEC2928710` (`aid`),
-  CONSTRAINT `FK302BCFEC2928710` FOREIGN KEY (`aid`) REFERENCES `account` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of category
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `goods`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
+  `info` varchar(500) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
   `price` decimal(10,2) DEFAULT '0.00',
   `picture` varchar(100) DEFAULT 'default.jpg',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES ('1', 'Tops', '66.50', 'pi.png');
-INSERT INTO `goods` VALUES ('3', '奈津', '39.90', 'pi2.png');
-INSERT INTO `goods` VALUES ('4', '益达', '25.90', 'pi3.png');
-INSERT INTO `goods` VALUES ('5', '猴魁', '168.00', 'pi4.png');
-INSERT INTO `goods` VALUES ('6', '麻辣', '39.80', 'pi5.png');
-INSERT INTO `goods` VALUES ('7', '荣业', '126.80', 'pi6.png');
-INSERT INTO `goods` VALUES ('8', '橄榄', '178.00', 'pi7.png');
+INSERT INTO `goods` VALUES ('wqwqw', '1', 'Tops', '66.50', 'pi.png');
+INSERT INTO `goods` VALUES ('sd', '3', '衬衫', '39.90', 'pi2.png');
+INSERT INTO `goods` VALUES ('sghgh', '4', '益达', '25.90', 'pi3.png');
+INSERT INTO `goods` VALUES ('erte', '5', '衬衫', '168.88', 'pi4.png');
+INSERT INTO `goods` VALUES ('zb', '6', '麻辣', '39.88', 'pi5.png');
+INSERT INTO `goods` VALUES ('ghndfg', '7', '荣业', '126.80', 'pi6.png');
+INSERT INTO `goods` VALUES ('dgg', '8', '橄榄', '178.00', 'pi7.png');
+INSERT INTO `goods` VALUES ('dsesgf', '42', 'iphone6', '666.00', '23a9a5e8-52e8-45e0-a53a-5649bf3af43b.png');
+INSERT INTO `goods` VALUES ('SDf', '43', 'iphone7', '7777.00', 'da140412-0699-4595-a9fa-f247f3b24512.png');
+INSERT INTO `goods` VALUES ('zfdg', '44', 'iphone8', '8888.00', 'e1b73eef-2d82-4d47-82ef-7ea81a221b82.png');
+INSERT INTO `goods` VALUES ('zfgzf', '45', 'iphone6', '777.00', 'bd7908b9-965c-407d-bfd7-72b2ba17b616.png');
+INSERT INTO `goods` VALUES ('nice car', '47', 'polp', '80000.00', '9366dae0-add1-4037-a72a-1850428f074c.png');
 
 -- ----------------------------
--- Table structure for `product`
+-- Table structure for `orders`
 -- ----------------------------
-DROP TABLE IF EXISTS `product`;
-CREATE TABLE `product` (
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) DEFAULT NULL,
-  `price` double(8,2) DEFAULT NULL,
-  `pic` varchar(200) DEFAULT NULL,
-  `remark` longtext,
-  `xremark` longtext,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `commend` tinyint(1) DEFAULT NULL,
-  `open` tinyint(1) DEFAULT NULL,
-  `cid` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKED8DCCEF11F72EF5` (`cid`),
-  CONSTRAINT `FKED8DCCEF11F72EF5` FOREIGN KEY (`cid`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of product
--- ----------------------------
-
--- ----------------------------
--- Table structure for `sorder`
--- ----------------------------
-DROP TABLE IF EXISTS `sorder`;
-CREATE TABLE `sorder` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) DEFAULT NULL,
-  `price` double(8,2) DEFAULT NULL,
-  `number` int(11) DEFAULT NULL,
-  `pid` int(11) DEFAULT NULL,
-  `bid` int(11) DEFAULT NULL,
+  `username` varchar(20) NOT NULL,
+  `buydate` datetime NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `pid` int(11) NOT NULL,
+  `picture` varchar(100) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `pname` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of sorder
+-- Records of orders
 -- ----------------------------
-
--- ----------------------------
--- Table structure for `status`
--- ----------------------------
-DROP TABLE IF EXISTS `status`;
-CREATE TABLE `status` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of status
--- ----------------------------
+INSERT INTO `orders` VALUES ('8', 'buyer', '2017-03-02 12:32:57', '1', '5', '/ShopMall/images/pi4.png', '168.88', '衬衫');
+INSERT INTO `orders` VALUES ('9', 'buyer', '2017-03-02 12:32:57', '2', '4', '/ShopMall/images/pi3.png', '25.90', '益达');
+INSERT INTO `orders` VALUES ('10', 'buyer', '2017-03-02 12:53:54', '1', '3', '/ShopMall/images/pi2.png', '39.90', '衬衫');
+INSERT INTO `orders` VALUES ('11', 'buyer', '2017-03-02 12:53:54', '1', '5', '/ShopMall/images/pi4.png', '168.88', '衬衫');
+INSERT INTO `orders` VALUES ('12', 'buyer', '2017-03-02 12:53:54', '1', '1', '/ShopMall/images/pi.png', '66.50', 'Tops');
+INSERT INTO `orders` VALUES ('13', 'buyer', '2017-03-02 12:59:50', '1', '3', '/ShopMall/images/pi2.png', '39.90', '衬衫');
+INSERT INTO `orders` VALUES ('14', 'buyer', '2017-03-02 12:59:50', '1', '4', '/ShopMall/images/pi3.png', '25.90', '益达');
+INSERT INTO `orders` VALUES ('15', 'buyer', '2017-03-23 19:29:30', '1', '5', '/ShopMall/images/pi4.png', '168.88', '衬衫');
+INSERT INTO `orders` VALUES ('16', 'buyer', '2017-03-23 19:29:30', '1', '4', '/ShopMall/images/pi3.png', '25.90', '益达');
+INSERT INTO `orders` VALUES ('17', 'buyer', '2017-03-23 20:28:59', '1', '45', '/ShopMall/images/bd7908b9-965c-407d-bfd7-72b2ba17b616.png', '777.00', 'iphone6');
+INSERT INTO `orders` VALUES ('18', 'buyer', '2017-03-23 20:28:59', '2', '4', '/ShopMall/images/pi3.png', '25.90', '益达');
+INSERT INTO `orders` VALUES ('19', 'buyer', '2017-03-23 20:45:40', '1', '6', '/ShopMall/images/pi5.png', '39.88', '麻辣');
+INSERT INTO `orders` VALUES ('20', 'buyer', '2017-03-23 20:52:04', '1', '4', '/ShopMall/images/pi3.png', '25.90', '益达');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -160,15 +83,14 @@ CREATE TABLE `status` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `login` varchar(20) DEFAULT NULL,
-  `name` varchar(36) DEFAULT NULL,
-  `pass` varchar(36) DEFAULT NULL,
-  `sex` varchar(8) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `email` varchar(20) DEFAULT NULL,
+  `name` varchar(36) NOT NULL,
+  `pass` varchar(36) NOT NULL,
+  `flag` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('1', 'buyer', '37254660e226ea65ce6f1efd54233424', '0');
+INSERT INTO `user` VALUES ('2', 'seller', '981c57a5cfb0f868e064904b8745766f', '1');
