@@ -25,6 +25,10 @@
 					<form:errors path="name" cssClass="error"></form:errors>
 				</p>
 				<p>
+					<label for="info">商品信息：</label>
+					<form:input path="info" size="50" />
+				</p>
+				<p>
 					<label for="price">商品价格：</label>
 					<form:input path="price" />
 					<form:errors path="price" cssClass="error"></form:errors>

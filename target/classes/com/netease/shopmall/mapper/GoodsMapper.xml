@@ -5,12 +5,12 @@
 	<!--获得商品信息并分页 -->
 	<select id="getGoodsPager" resultType="Goods">
 		select
-		id,name,price,picture from goods limit #{skip},#{size}
+		id,name,price,picture,info from goods limit #{skip},#{size}
 	</select>
 	<!-- 获得单个商品通过编号 -->
 	<select id="getGoodsById" parameterType="int" resultType="Goods">
 		select
-		id,name,price,picture from goods where id=#{id}
+		id,name,price,picture,info from goods where id=#{id}
 	</select>
 	
 	<select id="getAllGoods" resultType="Goods">
@@ -23,7 +23,7 @@
 	<!--新增加商品 -->
 	<insert id="insert" parameterType="Goods">
 		insert into
-		goods(name,price,picture) values(#{name},#{price},#{picture});
+		goods(name,price,picture,info) values(#{name},#{price},#{picture},#{info});
 	</insert>
 	<!-- 删除商品 -->
 	<delete id="delete">
@@ -32,6 +32,6 @@
 	<!-- 修改商品 -->
 	<update id="update" parameterType="Goods">
 		update goods set
-		name=#{name},price=#{price},picture=#{picture} where id=#{id}
+		name=#{name},price=#{price},picture=#{picture},info=#{info} where id=#{id}
 	</update>
 </mapper>

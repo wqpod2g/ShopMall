@@ -22,7 +22,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
 
 
 
@@ -35,18 +39,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="header-top">
 			<div class="container">
 				<div class="col-md-4 world">
-					<ul>
-						<li><select class="in-drop">
-								<option>English</option>
-								<option>Japanese</option>
-								<option>French</option>
-						</select></li>
-						<li><select class="in-drop1">
-								<option>Dollar</option>
-								<option>Euro</option>
-								<option>Yen</option>
-						</select></li>
-					</ul>
 				</div>
 				<div class="col-md-4 logo">
 					<a href="index.html"><img
@@ -58,7 +50,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<c:set var="buyerName" scope="session" value="${buyerName}" />
 						<c:if test="${not empty buyerName}">
 							<span>欢迎您！${buyerName}</span>
-							<a href="<c:url value="/user/loginout"/>" class="simpleCart_empty">退出</a>
+							<a href="<c:url value="/user/loginout"/>"
+								class="simpleCart_empty">退出</a>
 						</c:if>
 						<c:if test="${empty buyerName}">
 							<a href="<c:url value="/user/login"/>"> <span
@@ -95,152 +88,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div style="text-align: center;">购物车数据加载中...请稍待.</div>
 						<!--数据加载前显示的内容 结束-->
 					</div>
-					 总计<div class="simpleCart_total"></div>
+					<div class="col-md1">
+					合计:
+					<div class="simpleCart_total"></div>
+					<a class="btn btn-success" href="<c:url value="/cart/gotobuy"/>">去
+						结 算</a>
+				</div>
 				</div>
 			</div>
 		</div>
 		<div class="container">
 			<div class="head-top">
 				<div class="col-md-2 number">
-					<span><i class="glyphicon glyphicon-phone"></i>123 456 789</span>
 				</div>
-				<div class="col-md-8 h_menu4">
+				<div class="col-sm-8 h_menu4">
 					<ul class="memenu skyblue">
 						<li class=" grid"><a href="<c:url value="/goods/index"/>">首页</a></li>
-						<li><a href="#">Men</a>
-							<div class="mepanel">
-								<div class="row">
-									<div class="col1">
-										<div class="h_nav">
-											<h4>All Clothing</h4>
-											<ul>
-												<li><a href="products.html">Shirts</a></li>
-												<li><a href="products.html">Sports Wear</a></li>
-												<li><a href="products.html">Shorts</a></li>
-												<li><a href="products.html">Suits & Blazers</a></li>
-												<li><a href="products.html">Formal Shirts</a></li>
-												<li><a href="products.html">Sweatpants</a></li>
-												<li><a href="products.html">Swimwear</a></li>
-												<li><a href="products.html">Trousers & Chinos</a></li>
-												<li><a href="products.html">T-Shirts</a></li>
-												<li><a href="products.html">Underwear & Socks</a></li>
-
-											</ul>
-										</div>
-									</div>
-									<div class="col1">
-										<div class="h_nav">
-											<h4>Footwear</h4>
-											<ul>
-												<li><a href="products.html">Formal Shoes</a></li>
-												<li><a href="products.html">Boots</a></li>
-												<li><a href="products.html">Sports Shoes</a></li>
-												<li><a href="products.html">Casual Shoes</a></li>
-												<li><a href="products.html">Running Shoes</a></li>
-												<li><a href="products.html">Sneakers</a></li>
-												<li><a href="products.html">Loafers</a></li>
-												<li><a href="products.html">Slippers</a></li>
-												<li><a href="products.html">Sandals</a></li>
-												<li><a href="products.html">Flip-flops</a></li>
-
-											</ul>
-										</div>
-									</div>
-									<div class="col1">
-										<div class="h_nav">
-											<h4>Popular Brands</h4>
-											<ul>
-												<li><a href="products.html">Levis</a></li>
-												<li><a href="products.html">Persol</a></li>
-												<li><a href="products.html">Nike</a></li>
-												<li><a href="products.html">Edwin</a></li>
-												<li><a href="products.html">New Balance</a></li>
-												<li><a href="products.html">Jack & Jones</a></li>
-												<li><a href="products.html">Paul Smith</a></li>
-												<li><a href="products.html">Ray-Ban</a></li>
-												<li><a href="products.html">Wood Wood</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div></li>
-						<li class="grid"><a href="#"> Women</a>
-							<div class="mepanel">
-								<div class="row">
-									<div class="col1">
-										<div class="h_nav">
-											<h4>All Clothing</h4>
-											<ul>
-												<li><a href="products.html">Shirts & Tops</a></li>
-												<li><a href="products.html">Sports Wear</a></li>
-												<li><a href="products.html">Kurtas & Kurties</a></li>
-												<li><a href="products.html">Suits & Blazers</a></li>
-												<li><a href="products.html">Sarees</a></li>
-												<li><a href="products.html">Sweatpants</a></li>
-												<li><a href="products.html">Swimwear</a></li>
-												<li><a href="products.html">Night-Suits</a></li>
-												<li><a href="products.html">T-Shirts</a></li>
-												<li><a href="products.html">Jeans</a></li>
-
-											</ul>
-										</div>
-									</div>
-									<div class="col1">
-										<div class="h_nav">
-											<h4>Footwear</h4>
-											<ul>
-												<li><a href="products.html">Heels</a></li>
-												<li><a href="products.html">Flats</a></li>
-												<li><a href="products.html">Sports Shoes</a></li>
-												<li><a href="products.html">Casual Shoes</a></li>
-												<li><a href="products.html">Running Shoes</a></li>
-												<li><a href="products.html">Wedges</a></li>
-												<li><a href="products.html">Boots</a></li>
-												<li><a href="products.html">Pumps</a></li>
-												<li><a href="products.html">Slippers</a></li>
-												<li><a href="products.html">Flip-flops</a></li>
-
-											</ul>
-										</div>
-									</div>
-									<div class="col1">
-										<div class="h_nav">
-											<h4>Popular Brands</h4>
-											<ul>
-												<li><a href="products.html">Levis</a></li>
-												<li><a href="products.html">Persol</a></li>
-												<li><a href="products.html">Nike</a></li>
-												<li><a href="products.html">Edwin</a></li>
-												<li><a href="products.html">New Balance</a></li>
-												<li><a href="products.html">Jack & Jones</a></li>
-												<li><a href="products.html">Paul Smith</a></li>
-												<li><a href="products.html">Ray-Ban</a></li>
-												<li><a href="products.html">Wood Wood</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div></li>
-						<li><a href="typo.html">Blog</a></li>
-						<li><a class="color6" href="contact.html">Conact</a></li>
+						<li><a href="<c:url value="/goods/index"/>">Men</a></li>
+						<li class="grid"><a href="<c:url value="/goods/index"/>">
+								Women</a></li>
+						<li><a href="<c:url value="/goods/index"/>">Blog</a></li>
+						<li><a class="color6" href="<c:url value="/goods/index"/>">Conact</a></li>
 					</ul>
 				</div>
-				<div class="col-md-2 search">
-					<a class="play-icon popup-with-zoom-anim" href="#small-dialog"><i
-						class="glyphicon glyphicon-search"> </i> </a>
-				</div>
 				<div class="clearfix"></div>
-				<div id="small-dialog" class="mfp-hide">
-					<div class="search-top">
-						<div class="login">
-							<input type="submit" value=""> <input type="text"
-								value="Type something..." onfocus="this.value = '';"
-								onblur="if (this.value == '') {this.value = '';}">
-						</div>
-						<p>Shopping</p>
-					</div>
-				</div>
-				<!---->
 			</div>
 		</div>
 	</div>
@@ -252,17 +123,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-md-5 grid">
 					<div class="flexslider">
 						<img src="<c:url value="/images/${entity.picture }"/>"
-							data-imagezoom="true" class="img-responsive item_image">
+							data-imagezoom="true" class="img-responsive item_picture">
 					</div>
 				</div>
 				<div class="col-md-7 single-top-in">
+				<input type="hidden" value="${entity.id}" name="id" class="id">
+					<input type="hidden" value="${entity.picture}" name="picture"
+						class="picture"> <input type="hidden"
+						value="${entity.name}" name="name" class="name"> <input
+						type="hidden" value="${entity.price}" name="price" class="price">
 					<div class="single-para">
 						<h1 class="item_name">${entity.name }</h1>
-						<p>Contrary to popular belief, Lorem Ipsum is not simply
-							random text. It has roots in a piece of classical Latin
-							literature from 45 BC, making it over 2000 years old.It has roots
-							in a piece of classical Latin literature from 45 BC, making it
-							over 2000 years old.</p>
+						<h3 style="display: none;">
+							<a class="item_id" style="">${entity.id}</a>
+						</h3>
+						<p>${entity.info }.</p>
 						<div class="star-on">
 							<ul>
 								<li><a href="#"><i class="glyphicon glyphicon-star">
@@ -282,8 +157,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="clearfix"></div>
 						</div>
 
-						<label class="add-to item_price">￥ ${entity.price }</label> <a
-							href="#" class="cart item_add">加入购物车</a>
+						<label class="add-to item_price">￥ ${entity.price }</label>
+						<c:if test="${empty buyerName}">
+							<a href="<c:url value="/user/login"/>" class="cart">加入购物车</a>
+						</c:if>
+						<c:if test="${not empty buyerName}">
+							<a href="javascript:;" class="cart item_add">加入购物车</a>
+						</c:if>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -297,7 +177,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="clearfix"></div>
-				<p class="footer-class">Copyright &copy; 2015.Company name All
+				<p class="footer-class">Copyright &copy; 2017.mrpod2g All
 					rights reserved.</p>
 			</div>
 		</div>
@@ -309,12 +189,56 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script src="<c:url value="/scripts/memenu.js"/>"></script>
 	<script src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
 	<script type="text/javascript">
+		$("a.item_add").click(function() {
+			var index = $(this).parent();
+			var price = index.siblings(".price").attr("value");
+			var name = index.siblings(".name").attr("value");
+			var id = index.siblings(".id").attr("value");
+			var picture = index.siblings(".picture").attr("value");
+			$.ajax({
+				type : 'POST',
+				url : "<c:url value="/cart/addItem"/>",
+				data : {
+					"id" : id,
+					"name" : name,
+					"picture" : picture,
+					"price" : price
+				},
+				success : function(msg) {
+					alert(msg);
+				}
+			});
+		});
+
+		simpleCart.bind('beforeRemove', function(item) {
+			var id = item.get('id');
+			$.ajax({
+				type : 'POST',
+				url : "<c:url value="/cart/deleteItem"/>",
+				data : {
+					"id" : id
+				},
+				success : function(msg) {
+				}
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		simpleCart.currency({
+			code : "RMB",
+			name : "RMB",
+			symbol : "￥"
+		});
+
 		simpleCart({
 			cartColumns : [ {
+				attr : "id",
+				label : "商品编号"
+			}, {
 				attr : "name",
 				label : "商品名称"
 			}, {
-				attr : "image",
+				attr : "picture",
 				label : "图片",
 				view : "image"
 			}, {

@@ -4,11 +4,11 @@
 <mapper namespace="com.netease.shopmall.mapper.CartDAO">
 	<insert id="insert" parameterType="Orders">
 		insert into
-		sorder(pname,price,picture,username,buydate,pid,quantity) values(#{pname},#{price},#{picture},#{username},#{buydate},#{pid},#{quantity});
+		orders(pname,price,picture,username,buydate,pid,quantity) values(#{pname},#{price},#{picture},#{username},#{buydate},#{pid},#{quantity});
 	</insert>
 	
 	<select id="getAllOrders" parameterType="string" resultType="Orders">
-		select * from sorder where username=#{username}
+		select * from orders where username=#{username}
 	</select>
 	
 </mapper>
